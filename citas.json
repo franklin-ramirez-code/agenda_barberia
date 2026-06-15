@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "cliente": "fernando meza",
+        "telefono": "98586523",
+        "servicio": "corte",
+        "barbero": "andrea",
+        "dia": "lunes",
+        "hora": "09:00",
+        "estado": "atendida"
+    },
+    {
+        "id": 2,
+        "cliente": "blanca zelaya",
+        "telefono": "98574521",
+        "servicio": "cejas",
+        "barbero": "carlos",
+        "dia": "martes",
+        "hora": "15:00",
+        "estado": "pendiente"
+    },
+    {
+        "id": 3,
+        "cliente": "melissa perez",
+        "telefono": "32521452",
+        "servicio": "manicure",
+        "barbero": "miguel",
+        "dia": "martes",
+        "hora": "20:00",
+        "estado": "pendiente"
+    },
+    {
+        "id": 4,
+        "cliente": "carlos bogran",
+        "telefono": "89562310",
+        "servicio": "barba",
+        "barbero": "carlos",
+        "dia": "miercoles",
+        "hora": "01:00",
+        "estado": "pendiente"
+    },
+    {
+        "id": 5,
+        "cliente": "maria vargas",
+        "telefono": "32146585",
+        "servicio": "tinte",
+        "barbero": "miguel",
+        "dia": "jueves",
+        "hora": "15:00",
+        "estado": "pendiente"
+    }
+]
