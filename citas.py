@@ -1,5 +1,5 @@
 # IMPORTAR LAS FUNCIONES DE OTRO MODULO
-from validaciones import pedir_texto
+from validaciones import pedir_texto, hora_en_horario_atencion
 
 # DECLARAR LAS CONSTANES A NIVEL GLOBAL
 SERVICIOS = ('corte','barba', 'tinte', 'cejas', 'manicure')
@@ -64,6 +64,10 @@ def agregar_cita(citas: list) -> None: # None porque no retorna nada, solamente 
     barbero = pedir_barberos()
     dia = pedir_dia()
     hora = pedir_texto('Hora (HH:MM): ')
+    
+    if not hora_en_horario_atencion(hora):
+        print('ERROR: Horario de atencion entre 08:00 y 21:00')
+        return False
     
     if horario_ocupado(citas, barbero, dia, hora):
         print('ERROR: Ya hay una cita con este barbero el mismo dia y hora')

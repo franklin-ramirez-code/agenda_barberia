@@ -48,5 +48,15 @@
         "dia": "jueves",
         "hora": "15:00",
         "estado": "pendiente"
+    },
+    {
+        "id": 6,
+        "cliente": "cesar morales",
+        "telefono": "98563241",
+        "servicio": "cejas",
+        "barbero": "carlos",
+        "dia": "martes",
+        "hora": "21:00",
+        "estado": "pendiente"
     }
 ]
