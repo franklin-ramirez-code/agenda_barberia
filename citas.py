@@ -3,7 +3,7 @@ from validaciones import pedir_texto, hora_en_horario_atencion
 
 # DECLARAR LAS CONSTANES A NIVEL GLOBAL
 SERVICIOS = ('corte','barba', 'tinte', 'cejas', 'manicure')
-BARBEROS = (('carlos', 'andrea', 'miguel'))
+BARBEROS = ('carlos', 'andrea', 'miguel')
 DIAS = ('lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo')
 
 # GENERAR ID PARA CADA CLIENTE
@@ -49,15 +49,15 @@ def pedir_dia() -> str:
 
 # HORARIO OCUPADO: Devuelve un bool basicamente para responder si/no -> si = True, no = False
 # Se usan bool en este caso para validar algo
-def horario_ocupado(citas: list, servicio: str, barbero: str, dia: str) -> bool: 
+def horario_ocupado(citas: list, barbero: str, dia: str, hora: str) -> bool: 
     for cita in citas:
-        if cita['barbero'] == barbero and cita['servicio'] == servicio and cita['dia'] == dia:
+        if cita['barbero'] == barbero and cita['dia'] == dia and cita['hora'] == hora:
             if cita['estado'] == 'pendiente':
                 return True
     return False
 
 # AGREGAR CITAS NUEVAS: Primero se pide la entrada de texto y luego se guarda en el JSON usando los datos ingresados
-def agregar_cita(citas: list) -> None: # None porque no retorna nada, solamente guarda e imprime
+def agregar_cita(citas: list) -> bool: # None porque no retorna nada, solamente guarda e imprime
     cliente = pedir_texto('Cliente: ')
     telefono = pedir_texto('Telefono: ')
     servicio = pedir_servicio()
@@ -98,14 +98,14 @@ def mostrar_citas(citas) -> None:
     
     print(f'--- CITAS AGENDADAS: {len(citas)} ---')
     for cita in citas:
-        print(f'ID: {cita['id']}')
-        print(f'Cliente: {cita['cliente']}')
-        print(f'Telefono: {cita['telefono']}')
-        print(f'Servicio: {cita['servicio']}')
-        print(f'Barbero: {cita['barbero']}')
-        print(f'Dia: {cita['dia']}')
-        print(f'Hora: {cita['hora']}')
-        print(f'Estado: {cita['estado']}')
+        print(f"ID: {cita['id']}")
+        print(f"Cliente: {cita['cliente']}")
+        print(f"Telefono: {cita['telefono']}")
+        print(f"Servicio: {cita['servicio']}")
+        print(f"Barbero: {cita['barbero']}")
+        print(f"Dia: {cita['dia']}")
+        print(f"Hora: {cita['hora']}")
+        print(f"Estado: {cita['estado']}")
         print('-' * 30)
 
 # BUSCAR TODAS LAS CITAS QUE TENGA UN CLIENTE
@@ -132,6 +132,7 @@ def filtrar_citas_dia(citas: list, dia: str) -> list:
     for cita in citas:
         if cita['dia'] == dia:
             encontradas.append(cita)
+    return encontradas
 
 # DEVUELVE UNA SI LA ENCUENTRA, NONE SI NO
 def buscar_cita_exacta(citas, cliente, dia, hora) -> dict | None:
@@ -142,12 +143,12 @@ def buscar_cita_exacta(citas, cliente, dia, hora) -> dict | None:
     return None
 
 # MARCAR COMO CANCELADA UNA CITA
-def cancelar_cita(citas: list, cliente, dia, hora) -> bool:
+def cancelar_cita(citas: list) -> bool:
     cliente = pedir_texto('Cliente: ')
     dia = pedir_dia()
     hora = pedir_texto('Hora: ')
     
-    cita = buscar_cita_exacta(cita, cliente, dia, hora)
+    cita = buscar_cita_exacta(citas, cliente, dia, hora)
     
     if cita is None:
         print('ERROR: No existe registro del cliente solicitado')
@@ -179,6 +180,7 @@ def marcar_atendida(citas: list) -> bool:
     
     if cita['estado'] == 'atendida':
         print('ERROR: Esta cita ya se encuentra atendida')
+        return False
     
     if cita['estado'] == 'cancelada':
         print('ERROR: No puede marcar como atendida una cita cancelada')
